@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Value Expert</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background: #f4f4f4;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 50px;
+            background: #222;
+            color: white;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 90vh;
+            background: url('/static/download-free-car-images.jpg') no-repeat center center/cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: #fff;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin: 20px 0;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            padding: 20px 30px;
+            background: #f6071f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: #004495;
+        }
+
+        .about {
+            padding: 50px 20px;
+            text-align: center;
+            background: white;
+        }
+
+        .about h2 {
+            color: #333;
+        }
+
+        .about p {
+            color: #555;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px 10px;
+            background: #222;
+            color: white;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 20px;
+            }
+
+            nav a {
+                margin-top: 10px;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div>
+            <h1>Car Value Expert</h1>
+        </div>
+        <nav>
+            <a href="car_price_prediction/index.html">Home</a>
+            <a href="#about">About</a>
+            <a href="{{ url_for('reviews') }}">Reviews</a>
+            <a href="#contact">Contact</a>
+            <a href="{{ url_for('details') }}">Predict Price</a>
+        </nav>
+    </header>
+
+    <div id="home" class="hero" data-aos="fade-up" data-aos-duration="1000">
+        <h1>Welcome to Car Value Expert</h1>
+        <p>"Discover the true value of your car with precision and ease."</p>
+        <button class="cta-button" onclick="location.href='{{ url_for('details') }}'">Get Value</button>
+    </div>
+
+    <div id="about" class="about" data-aos="fade-up" data-aos-duration="1000">
+        <h2>About Us</h2>
+        <p>We are dedicated to providing accurate and detailed evaluations of used cars, helping you make informed
+            decisions whether you're buying or selling.</p>
+    </div>
+    <style>
+        .about {
+            padding: 50px 20px;
+            text-align: center;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 10vh;
+            /* Ensures section has enough height for centering */
+        }
+
+        .about p {
+            font-size: 1.2rem;
+            /* Increases font size of the paragraph */
+            line-height: 1.8;
+            /* Improves readability by increasing line spacing */
+            color: #333;
+            /* Optional: Adjust text color if needed */
+        }
+    </style>
+
+
+
+    <!-- bachodi -->
+
+    <div id="contact" class="contact" data-aos="fade-up" data-aos-duration="1000">
+        <h2>Contact</h2>
+        <div class="contact-row">
+            <div>
+                <p>Email: abhinav23102@iiitnr.edu.in</p>
+                <p>Phone: 123456789</p>
+            </div>
+            <div>
+                <p>Email: yuvraj23102@iiitnr.edu.in</p>
+                <p>Phone: 123456789</p>
+            </div>
+            <div>
+                <p>Email: sanjeev23102@iiitnr.edu.in</p>
+                <p>Phone: 12334556</p>
+            </div>
+            <div>
+                <p>Email: sudeep23102@iiitnr.edu.in</p>
+                <p>Phone: 1232345678</p>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .contact {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+            padding: 20px;
+            height: 15vh;
+            /* Adjust height as needed */
+            text-align: center;
+        }
+
+        .contact h2 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .contact-row {
+            display: flex;
+            flex-direction: row;
+            /* Aligns items in a row */
+            gap: 150px;
+            /* Adds spacing between each email-phone pair */
+            justify-content: center;
+            /* Centers the row content */
+            align-items: center;
+            /* Aligns items vertically */
+        }
+
+        .contact-row div {
+            text-align: center;
+            /* Centers text inside each div */
+        }
+
+        .contact p {
+            margin: 0;
+            /* Removes extra margin for cleaner alignment */
+        }
+    </style>
+
+
+
+
+
+    <footer data-aos="fade-up" data-aos-duration="1000">
+        <p>Contact Us | Privacy Policy | Terms of Service</p>
+        <p>&copy; 2024 Car Value Expert</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+</body>
+
+</html>
