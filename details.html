@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Value Expert</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Animation CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url("../static/back.webp") no-repeat center center fixed;
+            background-size: cover;
+            color: #ffffff;
+        }
+
+        .overlay {
+            background: rgba(0, 0, 0, 0.6);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 150%;
+            z-index: -1;
+        }
+
+        .main-container {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            width: 100%;
+            max-width: 1400px;
+            margin: 20px auto;
+        }
+
+        .did-you-know {
+            width: 20%;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+            animation: slideIn 1s ease-in-out;
+            overflow: hidden;
+        }
+
+        .did-you-know h2 {
+            font-size: 1.8rem;
+            color: #FFD700;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .did-you-know .fact {
+            margin-bottom: 15px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .did-you-know .fact:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 8px 16px rgba(255, 255, 255, 0.3);
+        }
+
+        .did-you-know .fact p {
+            font-size: 1rem;
+            color: #f1f1f1;
+            margin: 0;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        .did-you-know .fact p strong {
+            color: #FFD700;
+        }
+
+        .container {
+            background: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+            width: 60%;
+            max-width: 600px;
+            animation: fadeIn 1s ease-in-out;
+            color: #333;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: #222;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: block;
+            color: #555;
+        }
+
+        .form-group select,
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            transition: border 0.3s;
+        }
+
+        .form-group select:focus,
+        .form-group input:focus {
+            border: 1px solid #007bff;
+            outline: none;
+        }
+
+        .btn {
+            padding: 15px;
+            background-color: #007bff;
+            border: none;
+            color: #fff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border-radius: 8px;
+            text-transform: uppercase;
+            width: 100%;
+            transition: background-color 0.3s;
+            box-shadow: 0px 5px 10px rgba(0, 123, 255, 0.2);
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .sidebar {
+            width: 35%;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+            animation: slideIn 1s ease-in-out;
+        }
+
+        .sidebar h2 {
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #007bff;
+            font-weight: 700;
+        }
+
+        .car-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: zoomIn 0.8s ease-in-out;
+        }
+
+        .car-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .car-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .car-details {
+            padding: 15px;
+            text-align: left;
+        }
+
+        .car-details p {
+            margin: 8px 0;
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        .car-details strong {
+            color: #222;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(-20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+
+            .did-you-know,
+            .container,
+            .sidebar {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="overlay"></div>
+    <div class="main-container">
+        <!-- Did You Know Section -->
+        <div class="did-you-know">
+            <h2>Did You Know?</h2>
+            <div class="fact animate__animated animate__fadeInLeft">
+                <p><strong>Fact 1:</strong> Nearly 40 million used cars are sold every year worldwide, making it one of
+                    the largest markets in the auto industry.</p>
+            </div>
+            <div class="fact animate__animated animate__fadeInLeft" style="animation-delay: 0.2s;">
+                <p><strong>Fact 2:</strong> Buying a used car is eco-friendly as it reduces carbon emissions associated
+                    with manufacturing new vehicles.</p>
+            </div>
+            <div class="fact animate__animated animate__fadeInLeft" style="animation-delay: 0.4s;">
+                <p><strong>Fact 3:</strong> Used cars depreciate slower than new cars, saving buyers from the steep drop
+                    in value seen in the first few years.</p>
+            </div>
+            <div class="fact animate__animated animate__fadeInLeft" style="animation-delay: 0.6s;">
+                <p><strong>Fact 4:</strong> Certified pre-owned (CPO) vehicles come with warranties, making them as
+                    reliable as new cars.</p>
+            </div>
+            <div class="fact animate__animated animate__fadeInLeft" style="animation-delay: 0.8s;">
+                <p><strong>Fact 5:</strong> The most popular used car brands include Toyota, Honda, Ford, and Chevrolet
+                    for their reliability and performance.</p>
+            </div>
+        </div>
+
+        <!-- Main Form Section -->
+        <div class="container">
+            <h1>Enter Car Details</h1>
+            <form method="POST" action="/predict">
+                <div class="form-group">
+                    <label for="name">Car Brand</label>
+                    <select name="name" required>
+                        <option value="Maruti">Maruti</option>
+                        <option value="Hyundai">Hyundai</option>
+                        <option value="Honda">Honda</option>
+                        <option value="Toyota">Toyota</option>
+                        <option value="Ford">Ford</option>
+                        <option value="Honda">Honda</option>
+                        <option value="Hyundai">Hyundai</option>
+                        <option value="Toyota">Toyota</option>
+                        <option value="Ford">Ford</option>
+                        <option value="Renault">Renault</option>
+                        <option value="Mahindra">Mahindra</option>
+                        <option value="Tata">Tata</option>
+                        <option value="Chevrolet">Chevrolet</option>
+                        <option value="Datsun">Datsun</option>
+                        <option value="Jeep">Jeep</option>
+                        <option value="Mercedes-Benz">Mercedes-Benz</option>
+                        <option value="Mitsubishi">Mitsubishi</option>
+                        <option value="Audi">Audi</option>
+                        <option value="Volkswagen">Volkswagen</option>
+                        <option value="BMW">BMW</option>
+                        <option value="Nissan">Nissan</option>
+                        <option value="Lexus">Lexus</option>
+                        <option value="Jaguar">Jaguar</option>
+                        <option value="Land">Land</option>
+                        <option value="MG">MG</option>
+                        <option value="Volvo">Volvo</option>
+                        <!-- <option value="Daewoo">Daewoo</option>
+                        <option value="Kia">Kia</option>
+                        <option value="Fiat">Fiat</option>
+                        <option value="Force">Force</option>
+                        <option value="Ambassador">Ambassador</option>
+                        <option value="Ashok">Ashok</option>
+                        <option value="Isuzu">Isuzu</option>
+                        <option value="Opel">Opel</option>  -->
+                        <!-- Add more brands as needed-->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="year">Year</label>
+                    <input type="number" name="year" required placeholder="Enter year of manufacture">
+                </div>
+                <div class="form-group">
+                    <label for="km_driven">Kilometers Driven</label>
+                    <input type="number" name="km_driven" required placeholder="Enter kilometers driven">
+                </div>
+                <div class="form-group">
+                    <label for="fuel">Fuel Type</label>
+                    <select name="fuel" required>
+                        <option value="Diesel">Diesel</option>
+                        <option value="Petrol">Petrol</option>
+                        <option value="LPG">LPG</option>
+                        <option value="CNG">CNG</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="seller_type">Seller Type</label>
+                    <select name="seller_type" required>
+                        <option value="Individual">Individual</option>
+                        <option value="Dealer">Dealer</option>
+                        <option value="Trustmark Dealer">Trustmark Dealer</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="transmission">Transmission</label>
+                    <select name="transmission" required>
+                        <option value="Manual">Manual</option>
+                        <option value="Automatic">Automatic</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="owner">Previous Owners</label>
+                    <select name="owner" required>
+                        <option value="First Owner">First Owner</option>
+                        <option value="Second Owner">Second Owner</option>
+                        <option value="Third Owner">Third Owner</option>
+                        <option value="Fourth & Above Owner">Fourth & Above Owner</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="mileage">Mileage (km/l)</label>
+                    <input type="number" name="mileage" required placeholder="Enter mileage">
+                </div>
+                <div class="form-group">
+                    <label for="engine">Engine (cc)</label>
+                    <input type="number" name="engine" required placeholder="Enter engine capacity">
+                </div>
+                <div class="form-group">
+                    <label for="max_power">Max Power (bhp)</label>
+                    <input type="number" name="max_power" required placeholder="Enter max power">
+                </div>
+                <div class="form-group">
+                    <label for="seats">Seats</label>
+                    <input type="number" name="seats" required placeholder="Enter number of seats">
+                </div>
+                <button type="submit" class="btn">Get Prediction</button>
+            </form>
+        </div>
+
+        <!-- Sidebar for Popular Used Cars -->
+        <div class="sidebar">
+            <h2>Popular Used Cars</h2>
+            <div class="car-card">
+                <img src="../static/sven-d-a4S6KUuLeoM-unsplash.jpg" alt="Car Image" class="car-image">
+                <div class="car-details">
+                    <p><strong>Brand:</strong> Maruti</p>
+                    <p><strong>Year:</strong> 2018</p>
+                    <p><strong>Mileage:</strong> 21 km/l</p>
+                    <p><strong>Fuel Type:</strong> Petrol</p>
+                </div>
+            </div>
+            <div class="car-card">
+                <img src="../static/swansway-motor-group-3hCTtOEedzM-unsplash.jpg" alt="Car Image" class="car-image">
+                <div class="car-details">
+                    <p><strong>Brand:</strong> Hyundai</p>
+                    <p><strong>Year:</strong> 2019</p>
+                    <p><strong>Mileage:</strong> 18 km/l</p>
+                    <p><strong>Fuel Type:</strong> Diesel</p>
+                </div>
+            </div>
+            <div class="car-card">
+                <img src="../static/calitore-COYjMnrXHKM-unsplash.jpg" alt="Car Image" class="car-image">
+                <div class="car-details">
+                    <p><strong>Brand:</strong> Toyota</p>
+                    <p><strong>Year:</strong> 2020</p>
+                    <p><strong>Mileage:</strong> 15 km/l</p>
+                    <p><strong>Fuel Type:</strong> Petrol</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
