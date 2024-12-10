@@ -38,7 +38,7 @@ def home():
 def details():
     return render_template('details.html')
 
-@app.route('reviews.html)
+@app.route('reviews.html')
 def reviews():
     return render_template('reviews.html')
 
