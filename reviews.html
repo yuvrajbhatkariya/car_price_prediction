@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Value Expert - Reviews</title>
+    <!-- Animation CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f8f9fa;
+            /* Neutral light gray */
+            color: #333;
+            /* Dark gray for text */
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+            background: #2c3e50;
+            /* Professional dark blue-gray */
+            color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #3498db;
+            /* Subtle light blue */
+        }
+
+        .reviews-container {
+            padding: 30px;
+            max-width: 800px;
+            margin: 40px auto;
+            background: #ffffff;
+            /* Clean white for contrast */
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2.2rem;
+            color: #2c3e50;
+            /* Matches header */
+            font-weight: bold;
+        }
+
+        .review-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .review-form input,
+        .review-form textarea,
+        .review-form button {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            /* Subtle border */
+            border-radius: 5px;
+            font-size: 1rem;
+            background: #f8f9fa;
+            /* Light gray background for inputs */
+            color: #333;
+            outline: none;
+        }
+
+        .review-form input:focus,
+        .review-form textarea:focus {
+            border-color: #3498db;
+            /* Subtle focus color */
+            box-shadow: 0 0 5px #3498db;
+        }
+
+        .review-form button {
+            background: #2c3e50;
+            /* Matches header */
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .review-form button:hover {
+            background: #3498db;
+            transform: scale(1.02);
+        }
+
+        .star-rating {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            font-size: 1.8rem;
+            color: #f1c40f;
+            /* Soft gold */
+            cursor: pointer;
+        }
+
+        .reviews-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 10px 0;
+        }
+
+        .review-item {
+            background: #f8f9fa;
+            /* Light gray background */
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .review-item h4 {
+            margin: 0;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+
+        .review-item p {
+            margin: 10px 0 0;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            background: #2c3e50;
+            color: white;
+            font-size: 0.9rem;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .reviews-container {
+                padding: 20px;
+            }
+
+            .review-form input,
+            .review-form textarea {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div>
+            <h1>Car Value Expert</h1>
+        </div>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/reviews.html">Reviews</a>
+        </nav>
+    </header>
+
+    <div class="reviews-container">
+        <h2>User Reviews</h2>
+
+        <form class="review-form" id="reviewForm">
+            <input type="text" id="username" placeholder="Your Name" required>
+            <textarea id="reviewText" rows="4" placeholder="Write your review..." required></textarea>
+            <div class="star-rating">
+                <i class="far fa-star" data-value="1"></i>
+                <i class="far fa-star" data-value="2"></i>
+                <i class="far fa-star" data-value="3"></i>
+                <i class="far fa-star" data-value="4"></i>
+                <i class="far fa-star" data-value="5"></i>
+            </div>
+            <input type="hidden" id="rating" value="">
+            <button type="submit">Submit Review</button>
+        </form>
+
+        <div class="reviews-list" id="reviewsList">
+            <!-- Reviews will be dynamically inserted here -->
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Car Value Expert</p>
+    </footer>
+
+    <script>
+        const reviewForm = document.getElementById('reviewForm');
+        const reviewsList = document.getElementById('reviewsList');
+        const stars = document.querySelectorAll('.star-rating i');
+        const ratingInput = document.getElementById('rating');
+
+
+        // Add a default review when the page loads
+        window.onload = () => {
+            const defaultReview = document.createElement('div');
+            defaultReview.classList.add('review-item');
+            defaultReview.innerHTML = `
+        <h4>Abhinav</h4>
+        <div class="rating">
+            <i class="fas fa-star" style="color: #f1c40f;"></i>
+            <i class="fas fa-star" style="color: #f1c40f;"></i>
+            <i class="fas fa-star" style="color: #f1c40f;"></i>
+            <i class="far fa-star" style="color: #f1c40f;"></i>
+            <i class="far fa-star" style="color: #f1c40f;"></i>
+        </div>
+        <p>Very nice!</p>
+    `;
+            const reviewsList = document.getElementById('reviewsList');
+            reviewsList.appendChild(defaultReview);
+        };
+
+
+        stars.forEach((star) => {
+            star.addEventListener('click', () => {
+                const value = star.getAttribute('data-value');
+                ratingInput.value = value;
+
+                // Highlight stars
+                stars.forEach((s, index) => {
+                    if (index < value) {
+                        s.classList.add('fas');
+                        s.classList.remove('far');
+                    } else {
+                        s.classList.remove('fas');
+                        s.classList.add('far');
+                    }
+                });
+            });
+        });
+
+
+        reviewForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // Get form values
+            const username = document.getElementById('username').value.trim();
+            const reviewText = document.getElementById('reviewText').value.trim();
+            const rating = parseInt(ratingInput.value);
+
+            // Validation
+            if (!username || !reviewText || !rating) {
+                alert("Please fill in all fields and provide a rating before submitting your review.");
+                return;
+            }
+
+            // Create review element
+            const reviewItem = document.createElement('div');
+            reviewItem.classList.add('review-item');
+
+            // Generate stars based on rating
+            let starHTML = '';
+            for (let i = 1; i <= 5; i++) {
+                if (i <= rating) {
+                    starHTML += '<i class="fas fa-star" style="color: #f1c40f;"></i>'; // Filled star
+                } else {
+                    starHTML += '<i class="far fa-star" style="color: #f1c40f;"></i>'; // Empty star
+                }
+            }
+
+            reviewItem.innerHTML = `
+        <h4>${username}</h4>
+        <div class="rating">${starHTML}</div>
+        <p>${reviewText}</p>
+    `;
+
+            // Append review to the list
+            reviewsList.appendChild(reviewItem);
+
+            // Reset form
+            reviewForm.reset();
+            ratingInput.value = "";
+            stars.forEach((s) => s.classList.remove('fas'));
+        });
+
+    </script>
+</body>
+
+</html>
