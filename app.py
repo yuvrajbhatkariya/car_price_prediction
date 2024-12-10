@@ -30,19 +30,19 @@ owner_mapping = {
     'Fourth & Above Owner': 4, 'Test Drive Car': 5
 }
 
-@app.route('index.html')
+@app.route('/')
 def home():
     return render_template('index.html')  # Updated to 'index.html'
 
-@app.route('details.html')
+@app.route('/details')
 def details():
     return render_template('details.html')
 
-@app.route('reviews.html')
+@app.route('/reviews)
 def reviews():
     return render_template('reviews.html')
 
-@app.route('predict.html', methods=['POST'])
+@app.route('/predict', methods=['POST'])
 def predict():
     try:
         # Retrieve form data
