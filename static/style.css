@@ -1,0 +1,190 @@
+/* Resetting some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Basic styling for the body */
+body {
+    font-family: 'Arial', sans-serif;
+    /* background-color: #f0f4f8; */
+    /* background: url("back.webp") no-repeat center center fixed; */
+    /* color: #000000; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px; /* Added padding for spacing on smaller screens */
+}
+
+/* RESULT page: - */
+/* Centered container for the form */
+.container {
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+    padding: 100px;
+    background-color: #bd9e9e;
+    border-radius: 50px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 1s ease-out;
+}
+
+/* Heading style */
+h1 {
+    font-size: 50em;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #000000;
+    font-weight: 600;
+}
+
+/* Form styling */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Form Group Styling */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+}
+
+label {
+    font-size: 1.5em;
+    color: #2C3E50;
+    margin-bottom: 8px;
+}
+
+/* Input and select styles */
+select, input[type="number"], input[type="text"] {
+    padding: 15px;
+    font-size: 1.2em;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+}
+
+select:focus, input[type="number"]:focus, input[type="text"]:focus {
+    border-color: #007bff;
+    box-shadow: 0px 0px 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Input container for icons */
+.input-container {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    padding: 10px;
+}
+
+.input-container input {
+    border: none;
+    outline: none;
+    flex: 1;
+    padding: 10px;
+}
+
+.input-container i {
+    color: #555;
+    margin-right: 10px;
+}
+
+/* Styling for the dropdown (select elements) */
+select {
+    background-color: #bdb2b2;
+}
+
+/* Button Styling */
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 15px 25px;
+    font-size: 1.5em;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    align-self: center;
+}
+
+button:hover {
+    background-color: #0056b3;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 1024px) {
+    .container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2.5em;
+    }
+
+    button {
+        font-size: 1.3em;
+        padding: 12px 20px;
+    }
+
+    .form-group select,
+    .form-group input[type="number"],
+    .form-group input[type="text"] {
+        font-size: 1em;
+    }
+}
+
+/* Animation effects */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate__bounceIn {
+    animation: bounceIn 1s ease;
+}
+
+@keyframes bounceIn {
+    0% {
+        transform: scale(0.1);
+        opacity: 0;
+    }
+    60% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Styling for error messages */
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+/* Adding a simple box-shadow effect */
+.box-shadow {
+    box-shadow: 0px 5px 15px rgba(236, 82, 82, 0.1);
+}
