@@ -30,15 +30,15 @@ owner_mapping = {
     'Fourth & Above Owner': 4, 'Test Drive Car': 5
 }
 
-@app.route('/')
+@app.route('index.html')
 def home():
     return render_template('index.html')  # Updated to 'index.html'
 
-@app.route('/details')
+@app.route('details.html')
 def details():
     return render_template('details.html')
 
-@app.route('/reviews)
+@app.route('reviews.html)
 def reviews():
     return render_template('reviews.html')
 
