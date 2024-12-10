@@ -6,7 +6,7 @@ import numpy as np
 app = Flask(__name__)
 
 # Load the model (ensure the correct path to the model)
-model_path = '/Users/yuvrajbhatkariya/data/VScode.C++/Python/myenv/MINOR/model/car2.pkl'
+model_path = 'car2.pkl'
 try:
     # Load the pre-trained model
     model = pickle.load(open(model_path, 'rb'))
@@ -30,19 +30,19 @@ owner_mapping = {
     'Fourth & Above Owner': 4, 'Test Drive Car': 5
 }
 
-@app.route('/')
+@app.route('index.html')
 def home():
-    return render_template('home.html')  # Updated to 'index.html'
+    return render_template('index.html')  # Updated to 'index.html'
 
-@app.route('/details')
+@app.route('details.html')
 def details():
     return render_template('details.html')
 
-@app.route('/reviews')
+@app.route('reviews.html')
 def reviews():
     return render_template('reviews.html')
 
-@app.route('/predict', methods=['POST'])
+@app.route('predict.html', methods=['POST'])
 def predict():
     try:
         # Retrieve form data
